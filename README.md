@@ -37,3 +37,6 @@ MessageBoxA(NULL, strMboxMsg, strMboxTitle, MB_OK);
 ### Misc
 * If you wish to add a function you must keep it between the MalCodeBegin and MalCodeEnd markers. 
 * Don't forget to call the ScStdio::MalCode() at some point, otherwise when compiling in release with the suggested switches, the code will optimized away.
+
+ShellcodeStdio @ winternl.com (Jack Ullrich)
+Credit for cool macros: reddit.com/user/good_nickname
