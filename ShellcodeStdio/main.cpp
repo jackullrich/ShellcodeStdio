@@ -1,5 +1,7 @@
-#include <Windows.h>
+#include "ScStdio.h"
 
 int main(void) {
-	// Test
+
+	ScStdio::MalCode();
+	ScStdio::WriteShellcodeToDisk();	
 }
