@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{3D290E66-7787-4903-815A-B20586876EEE}</ProjectGuid>
+    <ProjectGuid>{FACF8E26-40F6-416F-B103-3FCB714FA6BB}</ProjectGuid>
     <RootNamespace>ShellcodeStdio</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.15063.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
