@@ -15,7 +15,7 @@ When working with this framework, and coding shellcode in general, you'll have t
 1. You must declare all your variables on the stack.
 2. Strings are no exception. This is how to create a char*, wchar_t* on the stack. Don't forget to null-terminate.
 ```C++
-unsigned char str[] = { 'E', 'x', 'a', 'p', 'l', 'e', 0 }; 
+unsigned char str[] = { 'E', 'x', 'a', 'm', 'p', 'l', 'e', 0 }; 
 unsigned char w_str[] = { 'E', 0, 'x', 0, 'a', 0, 'm', 0, 'p', 0, 'l', 0, 'e', 0, 0 };
 ```
 3. If you want to use an external function (i.e Windows API) you must first ensure the module containing the function is loaded into the current process. 
