@@ -20,6 +20,7 @@ unsigned char w_str[] = { 'E', 0, 'x', 0, 'a', 0, 'm', 0, 'p', 0, 'l', 0, 'e', 0
 ```
 3. If you want to use an external function (i.e Windows API) you must first ensure the module containing the function is loaded into the current process. 
 4. The second part of calling an external function is calling the DEFINE_FUNC_PTR or DEFINE_FWD_FUNC_PTR macro with the name of the module and the typedef of the function you want to call.
+5. Any forwarded functions will need to be defined using the DEFINE_FWD_FUNC_PTR macro.
 
 ### Hello World Example
 ```C++
@@ -32,6 +33,9 @@ LoadLibraryA(strUser32);
 
 DEFINE_FUNC_PTR("user32.dll", MessageBoxA);
 MessageBoxA(NULL, strMboxMsg, strMboxTitle, MB_OK);
+
+DEFINE_FWD_FUNC_PTR("ntdll.dll", "RtlExitUserThread", ExitThread);
+ExitThread(0);
 ```
 
 ### Misc
