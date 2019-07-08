@@ -1,27 +1,31 @@
 #include "ScStdio.h"
 
+#define ROR_SHIFT 13
+
 namespace ScStdio {
+
 	/*
-		Suggested VS Compilation Switches:
+		VS Compilation Switches:
 		C/C++ -> Optimization -> /O1, /Ob2, /Oi, /Os, /Oy-, /GL
 		C/C++ -> Code Generation -> /MT, /GS-, /Gy
 		Linker -> General -> /INCREMENTAL:NO
 	*/
 
+#ifndef _WIN64
 	__declspec(naked) void MalCodeBegin() { __asm { jmp MalCode } };
+#else
+	void MalCodeBegin() { MalCode(); }
+#endif
 
-#define htons(A) ((((WORD)(A) & 0xff00) >> 8) | (((WORD)(A) & 0x00ff) << 8))
-
-	__forceinline PEB *get_peb() {
-		PEB *p;
-		__asm {
-			mov eax, fs:[30h]
-			mov p, eax
-		}
+	PPEB getPEB() {
+		PPEB p;
+#ifndef _WIN64
+		p = (PPEB)__readfsdword(0x30);
+#else
+		p = (PPEB)__readgsqword(0x60);
+#endif
 		return p;
 	}
-
-#define ROR_SHIFT 13
 
 	constexpr DWORD ct_ror(DWORD n) {
 		return (n >> ROR_SHIFT) | (n << (sizeof(DWORD) * CHAR_BIT - ROR_SHIFT));
@@ -51,7 +55,7 @@ namespace ScStdio {
 	}
 
 	PVOID getProcAddrByHash(DWORD hash) {
-		PEB *peb = get_peb();
+		PEB *peb = getPEB();
 		LIST_ENTRY *first = peb->Ldr->InMemoryOrderModuleList.Flink;
 		LIST_ENTRY *ptr = first;
 		do {
@@ -106,7 +110,11 @@ namespace ScStdio {
 		MessageBoxA(NULL, strMboxMsg, strMboxTitle, MB_OK);
 	}
 
+#ifndef _WIN64
 	__declspec(naked) void MalCodeEnd() { };
+#else
+	void MalCodeEnd() {};
+#endif
 
 	BOOL WriteShellcodeToDisk()
 	{
