@@ -1,5 +1,5 @@
 ### ShellcodeStdio
-An extensible framework for easily writing debuggable, compiler optimized, position independent, x86 shellcode for windows platforms.
+An extensible framework for easily writing debuggable, compiler optimized, position independent, x86/x64 shellcode for windows platforms.
 
 For basic usage see main.cpp
 
