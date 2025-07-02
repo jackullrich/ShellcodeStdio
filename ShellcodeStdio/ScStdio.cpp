@@ -124,7 +124,7 @@ namespace ScStdio {
 		if (!FileHandle)
 			return false;
 
-		if (WriteFile(FileHandle, &MalCodeBegin, ((DWORD)&MalCodeEnd - (DWORD)&MalCodeBegin), &dwWritten, NULL))
+		if (WriteFile(FileHandle, &MalCodeBegin, (DWORD)(((ULONG_PTR)&MalCodeEnd - (ULONG_PTR)&MalCodeBegin)), &dwWritten, NULL))
 		{
 			CloseHandle(FileHandle);
 			return true;
